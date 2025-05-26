@@ -3,10 +3,13 @@ pandas>=1.0.0
 scikit-learn>=1.0.0
 streamlit>=1.0.0
 nltk>=3.5
-gensim>=4.0.0
+gensim>=4.0.0,<4.3.0
 matplotlib>=3.3.0
 seaborn>=0.11.0
-scipy>=1.5.0
+scipy>=1.7.0,<1.14.0
+textstat>=0.7.0
+tqdm>=4.0.0
+imbalanced-learn>=0.8.0
 
 # Aşağıdaki kütüphaneler projenizin özel ihtiyaçlarına göre gereklidir.
 # Eğer aktif olarak kullanılmıyorsa kaldırılabilir veya versiyonları projenize uygun şekilde düzenlenmelidir.
@@ -15,5 +18,4 @@ scipy>=1.5.0
 # spacy>=3.0.0  # spaCy kullanılıyorsa, dil modeli ayrıca indirilmelidir (örn: python -m spacy download en_core_web_sm)
 # wordcloud>=1.8.0
 # scikit-learn-intelex # Sadece Intel optimizasyonu için gerekliyse
-# imbalanced-learn>=0.8.0 # Dengesiz veri setleri için kullanılıyorsa
 # textstat>=0.7.0 # Metin okunabilirlik analizleri için kullanılıyorsa

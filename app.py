@@ -74,33 +74,71 @@ with st.sidebar:
     st.info("Please enter the full text of a news article in the box. The classifier will then predict its category.")
 
 # --- NLTK Downloads ---
-try:
-    nltk.data.find('punkt')
-    nltk.data.find('stopwords')
-    nltk.data.find('wordnet')
-except LookupError:
-    nltk.download('punkt')
-    nltk.download('stopwords')
-    nltk.download('wordnet')
+def download_nltk_resources():
+    """Download all required NLTK resources."""
+    resources = ['punkt', 'stopwords', 'wordnet']
+    for resource in resources:
+        try:
+            nltk.data.find(f'{resource}')
+            st.sidebar.success(f"NLTK resource '{resource}' is available.")
+        except LookupError:
+            st.sidebar.warning(f"Downloading NLTK resource '{resource}'...")
+            nltk.download(resource, quiet=True)
+            st.sidebar.success(f"Downloaded NLTK resource '{resource}'.")
+
+# Download resources
+download_nltk_resources()
 
 # --- Load Models ---
 @st.cache_resource
 def load_models():
+    model = None
+    w2v_model = None
+    error_messages = []
+    
+    # Try to load the classifier model
     try:
         model = joblib.load(os.path.join("models", "news_classifier_model.pkl"))
-        w2v_model = Word2Vec.load(os.path.join("models", "word2vec.model"))
-        return model, w2v_model
     except FileNotFoundError:
-        st.error("Model files not found. Please run the notebook first to generate the models.")
-        return None, None
+        try:
+            # Try root directory as fallback
+            model = joblib.load("news_classifier_model.pkl")
+        except FileNotFoundError:
+            error_messages.append("Classifier model not found. Please run the notebook first to generate the model.")
+    
+    # Try to load Word2Vec model from different locations
+    try:
+        # First try in models directory
+        w2v_model = Word2Vec.load(os.path.join("models", "word2vec.model"))
+    except FileNotFoundError:
+        try:
+            # Then try in root directory
+            w2v_model = Word2Vec.load("word2vec.model")
+        except FileNotFoundError:
+            error_messages.append("Word2Vec model not found. Please run the notebook first to generate the model.")
+    
+    # Display error messages if any
+    if error_messages:
+        for msg in error_messages:
+            st.error(msg)
+    
+    return model, w2v_model
 
 model, w2v_model = load_models()
 
 # --- Preprocessing and Vectorization ---
+def safe_tokenize(text):
+    """Tokenize text safely without relying on punkt_tab."""
+    try:
+        return nltk.word_tokenize(text)
+    except LookupError:
+        # Fallback tokenization if punkt_tab is missing
+        return text.lower().split()
+
 def preprocess_text(text):
     lemmatizer = WordNetLemmatizer()
     text = re.sub(r'\W', ' ', text.lower())
-    tokens = nltk.word_tokenize(text)
+    tokens = safe_tokenize(text)
     tokens = [lemmatizer.lemmatize(word)
               for word in tokens
               if word not in stopwords.words('english') and word not in string.punctuation]
@@ -133,8 +171,12 @@ user_input = st.text_area("Enter News Article Text Here:", "")
 if st.button("✨ Classify"):
     if user_input.strip() == "":
         st.warning("Please enter some text.")
-    elif model is None or w2v_model is None:
-        st.error("Models not loaded. Please ensure the model files exist.")
+    elif model is None and w2v_model is None:
+        st.error("Both models failed to load. Please run the notebook first to generate the models.")
+    elif model is None:
+        st.error("Classifier model failed to load. Please run the notebook first to generate the model.")
+    elif w2v_model is None:
+        st.error("Word2Vec model failed to load. Please run the notebook first to generate the model.")
     else:
         with st.spinner("Analyzing text..."):
             tokens = preprocess_text(user_input)
@@ -161,4 +203,4 @@ if st.button("✨ Classify"):
 # --- Footer ---
 st.markdown("---")
 st.caption("Developed by Muhammet Ali Yoldar | Turkish Aeronautical Association University")
-st.caption("Natural Language Processing Course Project | Fall 2023")
+st.caption("Natural Language Processing Course Project | Fall 2025")

@@ -108,4 +108,85 @@ streamlit run app.py
 
 ---
 
+## 🔄 Dengesiz Veri Seti Yönetimi
+
+Veri seti kategorileri arasında dengesizlik olduğu durumlarda, sınıflandırma modellerinin performansını artırmak için **SMOTE** (Synthetic Minority Over-sampling Technique) kullanılmıştır. Bu teknik:
+
+- Azınlık sınıfları için sentetik örnekler oluşturarak veri setini dengeler
+- Sınıflandırıcıların tüm kategoriler için daha iyi genelleme yapmasını sağlar
+- Eğitim verisindeki kategori dağılımının eşit olmasını sağlayarak sınıflandırma performansını iyileştirir
+
+SMOTE ile eğitim ve model değerlendirmesi için:
+
+```bash
+python train_with_smote.py
+```
+
+Bu betik:
+1. Word2Vec özelliklerini yükler
+2. SMOTE uygulayarak dengesiz kategorileri dengeler
+3. Lojistik Regresyon ve Random Forest modellerini eğitir
+4. Model performansını detaylı olarak raporlar
+5. Confusion matrix ve sınıf dağılım grafiklerini oluşturur
+6. Eğitilen modelleri `models` klasörüne kaydeder
+
+![SMOTE ile Sınıf Dağılımı](outputs/smote_class_distribution.png)
+
+## 📚 Okunabilirlik Analizi
+
+Proje kapsamında, haber makalelerinin okunabilirlik seviyelerini değerlendirmek için iki farklı metrik kullanılmıştır:
+
+1. **Flesch Reading Ease Score** - Metinlerin okunabilirlik kolaylığını ölçer. Yüksek skorlar daha kolay okunabilen metinleri, düşük skorlar ise daha karmaşık metinleri gösterir.
+
+2. **Dale-Chall Readability Score** - Metinlerin zorluk seviyesini sözcük karmaşıklığına göre değerlendirir. Yüksek skorlar daha zor metinleri ifade eder.
+
+Bu ölçümler, `textstat` kütüphanesi kullanılarak hesaplanmıştır. Hesaplama işlemleri için:
+
+```bash
+python calculate_readability_scores.py
+```
+
+Sonuçları görselleştirmek için:
+
+```bash
+python plot_readability_scores.py
+```
+
+![Readability Scores](outputs/readability_scores.png)
+
+Analiz sonuçlarına göre, farklı haber kategorilerinin farklı okunabilirlik seviyelerine sahip olduğu görülmektedir. Bu, hedef kitlesine göre haber dilinin değiştiğini göstermektedir.
+
 *This project was completed as part of the Natural Language Processing course requirements at Turkish Aeronautical Association University, Fall 2023.*
+
+## Troubleshooting
+
+### Model Loading Issues
+
+If you encounter issues with the models not being found when running the Streamlit app:
+
+1. Make sure you've run the notebook `bbc_news_classification_with_word2vec.ipynb` completely to generate the models
+2. Verify that the following files exist:
+   - `models/news_classifier_model.pkl` or `news_classifier_model.pkl` (in the root directory)
+   - `models/word2vec.model` or `word2vec.model` (in the root directory)
+3. If the models don't exist, you can run these sections of the notebook:
+   - Section "Train Word2Vec Model" to create the word2vec.model
+   - Section "Train and Evaluate Model" to create the news_classifier_model.pkl
+
+The app is designed to look for models in both the `models/` directory and the root directory.
+
+### NLTK Resource Issues
+
+If you encounter issues with NLTK resources not being found (like 'punkt_tab' or other resources), you can run the provided script to download all required NLTK resources:
+
+```bash
+python download_nltk_resources.py
+```
+
+This will download all required NLTK packages to your user's NLTK data directory. If you still encounter issues, try adding the missing resources manually:
+
+```python
+import nltk
+nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('wordnet')
+```
