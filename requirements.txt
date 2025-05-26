@@ -1,0 +1,16 @@
+﻿numpy
+pandas
+scikit-learn
+streamlit
+nltk
+gensim
+matplotlib
+seaborn
+scipy
+plotly
+textblob
+spacy
+wordcloud
+scikit-learn-intelex
+imbalanced-learn
+textstat

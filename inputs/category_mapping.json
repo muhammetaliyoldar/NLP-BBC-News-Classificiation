@@ -1,0 +1,48 @@
+{
+  "bbc_categories": [
+    "business",
+    "entertainment",
+    "politics",
+    "sport",
+    "tech"
+  ],
+  "mapping_used": {
+    "business": [
+      "BUSINESS",
+      "MONEY",
+      "FINANCE",
+      "ECONOMIC"
+    ],
+    "entertainment": [
+      "ENTERTAINMENT",
+      "ARTS",
+      "CULTURE",
+      "COMEDY",
+      "ARTS & CULTURE",
+      "MEDIA"
+    ],
+    "politics": [
+      "POLITICS",
+      "WORLDPOST",
+      "WORLD NEWS",
+      "WORLD"
+    ],
+    "sport": [
+      "SPORTS",
+      "SPORT"
+    ],
+    "tech": [
+      "TECH",
+      "SCIENCE & TECH",
+      "TECHNOLOGY",
+      "SCIENCE"
+    ]
+  },
+  "category_counts": {
+    "business": 7748,
+    "entertainment": 28554,
+    "politics": 41480,
+    "sport": 5077,
+    "tech": 4310
+  }
+}
