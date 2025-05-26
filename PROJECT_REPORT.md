@@ -5,7 +5,7 @@
 **Department:** Computer Engineering  
 **University:** Turkish Aeronautical Association University  
 **Course:** Natural Language Processing  
-**Semester:** Fall 2023
+**Semester:** Fall 2025
 
 ## 1. Introduction
 
