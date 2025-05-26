@@ -1,8 +1,8 @@
-# Proje Kurulum, Çalıştırma ve Test Rehberi
+# Project Setup and Usage Guide
 
-## Giriş
+## Introduction
 
-Bu rehber, "Haber Makalesi Sınıflandırma ve Analiz" projesini baştan sona nasıl kuracağınızı, çalıştıracağınızı ve test edeceğinizi adım adım açıklamaktadır. Projenin amacı, verilen haber metinlerini NLP teknikleri kullanarak business, entertainment, politics, sport, ve tech gibi önceden tanımlanmış kategorilere ayırmaktır.
+This guide explains step-by-step how to set up, run, and test the "News Article Classification and Analysis" project. The project aims to classify news texts into predefined categories such as business, entertainment, politics, sport, and tech using NLP techniques.
 
 ## Bölüm 1: Proje Dosyalarının Hazırlanması
 

@@ -69,10 +69,25 @@ Computer Engineering, 4th Year
    - 100-dimensional word embeddings
    - CBOW architecture with negative sampling
    - Document vectors via word vector averaging
+   - Window size of 50 for capturing context
+   - Min count of 5 to filter rare words
+   - Custom training with 2225 news articles
+   - Captures semantic relationships between words
 
 3. **TF-IDF (for comparison)**
    - Term frequency-inverse document frequency
    - Dimensionality reduction with SVD
+
+---
+
+## Why Word2Vec?
+
+- **Semantic Understanding**: Captures meaning and relationships between words
+- **Context Awareness**: Words with similar contexts have similar vectors
+- **Dimensionality Reduction**: Converts variable-length texts to fixed-size vectors
+- **Performance**: Outperformed traditional bag-of-words methods
+- **Vector Operations**: Enables semantic operations (king - man + woman ≈ queen)
+- **Visualization**: Allows for semantic space visualization and clustering
 
 ---
 
@@ -83,6 +98,7 @@ Implemented and evaluated multiple classifiers:
 1. **Random Forest**
    - 200 trees, max depth 10
    - Class balancing with SMOTE
+   - Best overall performance (94.3% accuracy)
 
 2. **Naïve Bayes**
    - Multinomial variant
@@ -124,6 +140,17 @@ Implemented and evaluated multiple classifiers:
 
 ---
 
+## Word2Vec Visualizations
+
+- Word embeddings visualized using t-SNE
+- Clear clustering of category-specific terms
+- Examples:
+  - Sports terms: "goal", "match", "team" close together
+  - Business terms: "market", "company", "shares" in another cluster
+  - Tech terms: "digital", "software", "online" form distinct group
+
+---
+
 ## Interactive Demo
 
 ![Demo Screenshot](https://mermaid.ink/img/pako:eNpVkLFuwzAMRH-F4JShyQ94CbJ0K1CgS9HBkGnHQGTKEOkkMPzvpZ0WRUIOvDveDfCutTGQQR5Ml-3G2j6Zu-29BbWxG2P_1E5NXnXJDVrwmfPe7y3KGr2b1YGv3C8Szp0L0SU5qmYZM6pIyLErIbCFn9yHxSAYJzr9EZWLcPKoKwxjjJdgSMRFiGaJZ_e46HSqVRkL-BbkVkTfxHJ2rRXkjHuVguxlr4Lal3yRr-WF5EW-yjcYtcMc-5JDRR_QO1sVDUvzZLdE4mjMxpkLBYxcjkxpqKMfEU5d4oADVIk9cBWzP1aNb3U?type=png)
@@ -151,6 +178,16 @@ Implemented and evaluated multiple classifiers:
 
 ---
 
+## Word2Vec Impact
+
+- **Classification Accuracy**: Improved by ~3% over traditional bag-of-words
+- **Feature Reduction**: Reduced feature space from ~10,000 to 100 dimensions
+- **Semantic Analysis**: Enabled analysis of term relationships
+- **Explainability**: Made results more interpretable through word similarity
+- **Adaptability**: Model can be extended to new vocabulary
+
+---
+
 ## Future Work
 
 - Implement deep learning models (LSTM, Transformers)
@@ -158,6 +195,8 @@ Implemented and evaluated multiple classifiers:
 - Add multilingual capabilities
 - Integrate with news aggregation services
 - Explore transfer learning with pre-trained models
+- Fine-tune Word2Vec parameters for domain-specific improvements
+- Implement attention mechanisms for better context understanding
 
 ---
 
